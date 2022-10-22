@@ -1,8 +1,8 @@
 const express = require('express');
 
-const emojis = require('./emojis');
-
 const router = express.Router();
+
+const activitesJson = require('../resources/activities.json');
 
 router.get('/', (req, res) => {
   res.json({
@@ -10,6 +10,11 @@ router.get('/', (req, res) => {
   });
 });
 
-router.use('/emojis', emojis);
+// GET /api/v1/activites
+router.get('/activities', (req, res) => {
+  res.json({
+    data: activitesJson,
+  });
+});
 
 module.exports = router;
