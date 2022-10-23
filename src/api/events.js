@@ -16,14 +16,18 @@ router.get('/', async (req, res) => {
       if (err) throw err;
 
       const dbo = db.db('antavo');
-      const rewardCollection = dbo.collection('Events');
+      const eventsCollection = dbo.collection('Events');
 
-      const result = await rewardCollection
+      const result = await eventsCollection
         .find({
-          action: 'activity',
-          'properties.activity': '624409cc3f7d41816127e65f',
+          //   action: 'activity',
+          //   'properties.activity': '624409cc3f7d41816127e65f',
+          action: 'checkout',
+          guest: 'true',
+          //   'properties.level': 'gold',
         })
-        .limit(50)
+        // .distinct('customer');
+        // .limit()
         .toArray();
 
       res.status(200).json({

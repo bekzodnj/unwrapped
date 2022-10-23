@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const middlewares = require('./middlewares');
 const api = require('./api');
 const events = require('./api/events');
+const level_set = require('./api/actions/level_set');
 
 const { config } = require('./resources/config');
 
@@ -47,6 +48,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', api);
 app.use('/api/events', events);
+app.use('/api/action', level_set);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
