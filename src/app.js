@@ -7,6 +7,9 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const middlewares = require('./middlewares');
 const api = require('./api');
+const events = require('./api/events');
+
+const { config } = require('./resources/config');
 
 const app = express();
 
@@ -19,10 +22,7 @@ app.use(express.json());
 // mongoose.set('useFindAndModify', false);
 // mongoose.set('useCreateIndex', true);
 
-const config = {
-  dbUrl:
-    'mongodb+srv://bekzodnj:Zzomeinforu123@cluster0.72lzwp2.mongodb.net/?retryWrites=true&w=majority',
-};
+// mongodb+srv://bekzodnj:Zzomeinforu123@cluster0.72lzwp2.mongodb.net/?retryWrites=true&w=majority
 
 const options = {
   keepAlive: true,
@@ -45,7 +45,8 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/api/v1', api);
+app.use('/api', api);
+app.use('/api/events', events);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
